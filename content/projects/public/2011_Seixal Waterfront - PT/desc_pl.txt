@@ -1,7 +1,0 @@
-ProjectName: Projekt nabrzeże 
-ProjectLocation:Seixal, PT
-ProjectYear:2011
-
-Projekt rewitalizacji nabrzeża turystycznego wraz z portem rekreacyjnym w Portugalskiej miejscowości Seixal. Koncepcja opiera się przede wszystkim na uporządkowaniu przestrzeni i nadaniu jej zharmonizowanego czytelnego klimatu do wypoczynku nad woda.
-
-Design by: Eng. Jan Biernawski

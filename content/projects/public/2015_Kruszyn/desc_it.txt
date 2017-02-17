@@ -1,5 +1,0 @@
-ProjectName: Green City Square
-ProjectLocation: Kruszyn, PL
-ProjectYear:2015
-
-L'idea principale per questo sito era quella di creare uno spazio accogliente, destinato alla ricreazione passiva. Sara' il luogo che permetterà di migliorare notevolmente il paesaggio grazie all'introduzione di piante ed elementi di arredo con alto valore estetico.

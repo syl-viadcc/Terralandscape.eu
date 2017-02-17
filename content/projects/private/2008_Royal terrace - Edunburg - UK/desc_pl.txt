@@ -1,9 +1,0 @@
-ProjectName: Royal Palace
-ProjectLocation: Edynburg, UK
-ProjectYear:2008
-
-Ogród położony w dzielnicy rezydencjalnej na jednym ze wzgórz Edynburga z prawdziwie angielskim charakterem. Otoczony wysokim murem i zacieniony koronami starych drzew.
-
-Zamysłem projektanta było wydobycie historycznego charakteru tego miejsca przez nawiązania do klasyki sztuki ogrodowej, na przykład poprzez zastosowanie regularnych układów żywopłotów bukszpanowych. Jednocześnie "stara" maniera została przełamana elementami nowoczesności - okrągłe patio, wijąca się nieregularna ścieżka, "domek na drzewie" oraz element zielonego dachu. Ogród wyposażono w system oświetlenia, nawadnianie nie było tu konieczne.
-
-Autor projektu - Dugal McLeod, projekt zrealizowany podczas stażu z udziałem A.Olszewskiej

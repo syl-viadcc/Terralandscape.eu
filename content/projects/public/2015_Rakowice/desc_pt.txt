@@ -1,0 +1,8 @@
+ProjectName: Recreation area
+ProjectLocation: Rakowice, PL
+ProjectYear:2015
+
+Este citio pode servir como um ponto de paragem para os ciclistas, ou pedestres, e por isso pode ser usado para os piqueniques, local para descanso e orientação no terreno.
+
+Além disso, a área será visto por pessoas que passavam caminhos cruzados, neste ponto, que é um bom acento na paisagem, que ao mesmo tempo não é dominante na paisagem cultural circundante. Vista de uma estação de bombeamento e um canal de drenagem, nao sao desejáveis, portanto, utilizamos solucoes para mascarar estes elementos.
+

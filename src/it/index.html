@@ -1,12 +1,12 @@
 <?php
 //vars setting
-$lang = 'en';
-include 'terra-data.php';
-include 'terra-projects.php';
-
-$baseDir = '';
-$projects = new TerraProjects();
+$lang = 'it';
+include '../terra-data.php';
+include '../terra-projects.php';
+$baseDir = '../';
 $data = new TerraLandscape();
+$projectsClass = new TerraProjects();
+
 $config = $data->loadConfig($lang);
 $about = $data->getAboutUsData();
 $team = $data->getTeam();
@@ -57,6 +57,7 @@ $contact = $data->getContact();
     <body id="page-top">
         <span id='base_url'  title="<?= $data->getBaseURL(); ?>"></span>
         <span id='lang'  title="<?= $lang; ?>"></span>
+        
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-fixed-top" id="mainNav">
           <div class="container">
@@ -67,7 +68,7 @@ $contact = $data->getContact();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="<?= $data->getBaseURL(); ?>">
+              <a class="navbar-brand" href="<?= $data->getBaseURL().$lang; ?>">
                     <img src="<?= $baseDir ?>img/terra-logo1.png" alt="">
               </a>              
             </div>
@@ -75,21 +76,23 @@ $contact = $data->getContact();
               <ul class="nav navbar-nav navbar-right">
                 <?php foreach ($data->getMainMenu() as $link => $menuData): ?>
                     <?php $class = (strstr($link, "#")!= FALSE)?'class="page-scroll"': '';?>
-                    <li  data-target=".in" data-toggle="collapse"><a <?=$class?> href="<?= $link ?>"><?= $menuData[$lang] ?></a></li>
+                    <li  data-target=".in" data-toggle="collapse">
+                        <a <?=$class?> href="<?= $link ?>"><?= $menuData[$lang] ?></a>
+                    </li>
                 <?php endforeach; ?> 
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= strtoupper($lang); ?><span class="caret"></span></a>
                   <ul class="dropdown-menu">
+                    <li><a href="<?=$baseDir?>">EN</a></li>
                     <li><a href="<?=$baseDir?>pt/">PT</a></li>
                     <li><a href="<?=$baseDir?>pl/">PL</a></li>
-                    <li><a href="<?=$baseDir?>it/">IT</a></li>
                   </ul>
                 </li>
               </ul>              
             </div><!--/.nav-collapse -->
           </div>
-        </nav>        
-
+        </nav>
+        
         <header>
             <div id="header-carousel" class="owl-carousel owl-theme">
                 <?php foreach ($data->getHeaderData() as $header): ?>
@@ -98,7 +101,7 @@ $contact = $data->getContact();
                         <img class="img-responsive" src="<?= $baseDir ?>img/header/<?= $header['img'] ?>" alt="<?= $header['desc'][$lang]['title'] ?>">
                     </div>
                     <div class="inner"><a href="#">
-                            <span class="text-dark"><?= $header['desc'][$lang]['title'] ?></span>
+                             <span class="text-dark"><?= $header['desc'][$lang]['title'] ?></span>
                             &nbsp; - &nbsp;
                             <span><?= $header['desc'][$lang]['place'] ?></span>
                         </a>
@@ -126,7 +129,7 @@ $contact = $data->getContact();
                 <div class="row">
                     <div class="text-justify col-xs-9 col-xs-offset-1 col-sm-6 col-sm-offset-1 wowload fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;">        
                         <?php foreach ($data->loadAboutParagraphs($lang, $baseDir) as $paragraph): ?>
-                        <p><?= $paragraph ?></p>
+                            <p><?= $paragraph ?></p>
                         <?php endforeach; ?>                         
 
                     </div> 
@@ -139,7 +142,7 @@ $contact = $data->getContact();
 
 
         <!--transparent transition-->
-        <section class="bg-primary  section-small">
+        <section class="bg-primary section-small">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-right">
@@ -225,57 +228,56 @@ $contact = $data->getContact();
         <section class="no-padding" id="projects">
             <div class="container-fluid">
                 <div class="row no-gutter">
-                    
-                    <?php foreach ($projects->getProjectsData('front', $lang) as $index => $projectData): ?>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" data-toggle="modal" data-target="#front_<?= $index ?>" class="portfolio-box">
-                            <img src="<?= $baseDir ?><?= $projects->getPath('front') ?>/<?= $projectData['dir'] ?>/<?= $projectData['main_image'] ?>" 
-                                 class="img-responsive" alt="<?= (!empty($projectData['project_name'])) ? $projectData['project_name'] : ""; ?>">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-name">
-                                        <?= (!empty($projectData['project_name'])) ? $projectData['project_name'] : "Terra Project"; ?><br>
-                                        <?= (!empty($projectData['project_location'])) ? $projectData['project_location'] : ""; ?> 
-                                        <?= (!empty($projectData['project_year'])) ? (((!empty($projectData['project_location']) ? ", " : "")) . $projectData['project_year']) : ""; ?>
+                    <?php foreach ($projectsClass->getProjectsData('front', $lang, $baseDir) as $index => $projectData): ?>
+                        <div class="col-lg-4 col-sm-6">
+                            <a href="#" data-toggle="modal" data-target="#front_<?= $index ?>" class="portfolio-box">
+                                <img src="<?= $baseDir ?><?= $projectsClass->getPath('front') ?>/<?= str_replace('../','',$projectData['dir']) ?>/<?= $projectData['main_image'] ?>" 
+                                     class="img-responsive" alt="<?= (!empty($projectData['project_name'])) ? $projectData['project_name'] : ""; ?>">
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <div class="project-name">
+                                            <?= (!empty($projectData['project_name'])) ? $projectData['project_name'] : "Terra Project"; ?><br>
+                                            <?= (!empty($projectData['project_location'])) ? $projectData['project_location'] : ""; ?> 
+                                            <?= (!empty($projectData['project_year'])) ? (((!empty($projectData['project_location']) ? ", " : "")) . $projectData['project_year']) : ""; ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
 
-                        <div class="modal fade owl-project" id="front_<?= $index ?>" tabindex="-1" role="dialog" aria-labelledby="<?= $projectData['project_name'] ?>">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="<?= $projectData['project_name'] ?>">
-                                            <div class="project-name">
-                                                <?= (!empty($projectData['project_name'])) ? $projectData['project_name'] : "Terra Project"; ?><br>
-                                                <?= (!empty($projectData['project_location'])) ? $projectData['project_location'] : ""; ?> 
-                                                <?= (!empty($projectData['project_year'])) ? (((!empty($projectData['project_location']) ? ", " : "")) . $projectData['project_year']) : ""; ?>
-                                            </div>
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <?php if (!empty($projectData['images'])): ?>
-                                        <div class="project-gallery" title="<?= $baseDir ?><?= $projects->getPath('front') ?>/<?= $projectData['dir'] ?>">
-                                            <?php foreach ($projectData['images'] as $image): ?>
-                                            <span class="gimage" title="<?= $image ?>"></span>
-                                            <?php endforeach; ?>
-                                        </div>                                                        
-                                        <?php endif; ?>
-                                        <?php if (!empty($projectData['description'])): ?>
-                                        <?php foreach ($projectData['description'] as $paragraph): ?>
-                                        <p><?= $paragraph ?></p>
-                                        <?php endforeach; ?> 
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                                                        
+                            <div class="modal fade owl-project" id="front_<?= $index ?>" tabindex="-1" role="dialog" aria-labelledby="<?= $projectData['project_name'] ?>">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="<?= $projectData['project_name'] ?>">
+                                                <div class="project-name">
+                                                    <?= (!empty($projectData['project_name'])) ? $projectData['project_name'] : "Terra Project"; ?><br>
+                                                    <?= (!empty($projectData['project_location'])) ? $projectData['project_location'] : ""; ?> 
+                                                    <?= (!empty($projectData['project_year'])) ? (((!empty($projectData['project_location']) ? ", " : "")) . $projectData['project_year']) : ""; ?>
+                                                </div>
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php if (!empty($projectData['images'])): ?>
+                                                <div class="project-gallery" title="<?= $baseDir ?><?= $projectsClass->getPath('front') ?>/<?= str_replace('../','',$projectData['dir']) ?>">
+                                                    <?php foreach ($projectData['images'] as $image): ?>
+                                                        <span class="gimage" title="<?= $image ?>"></span>
+                                                    <?php endforeach; ?>
+                                                </div>                                                        
+                                            <?php endif; ?>
+                                            <?php if (!empty($projectData['description'])): ?>
+                                                <?php foreach ($projectData['description'] as $paragraph): ?>
+                                                    <p><?= $paragraph ?></p>
+                                                <?php endforeach; ?> 
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -288,9 +290,9 @@ $contact = $data->getContact();
                     <h2><?= $social['header'][$lang] ?></h2>
                     <div id="social">
                         <?php foreach ($social['data'] as $name => $linkData): ?>
-                        <?php if ($linkData['active']): ?>
-                        <a href="<?= $linkData['link'] ?>" class="icon wow tada" target="_blank" title="<?= $linkData['title'][$lang] ?>"><i class="<?= $linkData['icon'] ?>"></i></a>
-                        <?php endif; ?>                            
+                            <?php if ($linkData['active']): ?>
+                                <a href="<?= $linkData['link'] ?>" class="icon wow tada" target="_blank" title="<?= $linkData['title'][$lang] ?>"><i class="<?= $linkData['icon'] ?>"></i></a>
+                            <?php endif; ?>                            
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -326,8 +328,10 @@ $contact = $data->getContact();
 
         <!-- jQuery -->
         <script src="<?= $baseDir ?>js/jquery.js"></script>
+
         <!-- Bootstrap Core JavaScript -->
         <script src="<?= $baseDir ?>js/bootstrap.min.js"></script>
+
         <!-- Plugin JavaScript -->
         <script src="<?= $baseDir ?>js/jquery.easing.min.js"></script>
         <script src="<?= $baseDir ?>js/jquery.fittext.js"></script>

@@ -1,1 +1,4 @@
 nbproject/
+apache2.conf
+Dockerfile
+docker-compose.yml
